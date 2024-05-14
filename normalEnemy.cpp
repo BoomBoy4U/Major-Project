@@ -15,7 +15,7 @@ normalEnemy::normalEnemy(std::string Name, std::string info, int element, int he
 }		//create normal enemy class
 
 int normalEnemy::ActionResult() {
-	int Result = 0;
 	Result = attack;
+	std::cout << Name << " use basic attack." << std::endl;
 	return Result;
 } 		//only for basic attack

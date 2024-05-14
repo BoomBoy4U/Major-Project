@@ -7,7 +7,7 @@
 int main() {
     std::string name;
     std::cout << "Input name: ";
-    std::cin >> name;
+    std::getline(std::cin, name);
 
  Player p2(name, "wizard", 0, 100, 40, 10);
 
@@ -36,9 +36,13 @@ int main() {
         
 
         // Player choice test /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        p2.set_playerActionOption(0);
+        int option;
+        std::cout << "please press number from 1 to 3: ";
+        std::cin >> option;
+        
+        p2.set_playerActionOption(option);
         std::cout << "Player Option: " << p2.get_playerOption() << std::endl;
-        std::cout << "Player action deal: " << p2.ActionResult(p2.get_playerOption()) << std::endl;
+        std::cout << p2.get_name() << " action deal: " << p2.ActionResult(p2.get_playerOption()) << std::endl;
         std::cout << "player hit or miss: " << p2.get_hitMiss() << std::endl;
 
 
@@ -55,6 +59,8 @@ int main() {
         else {
             std::cout << "element is: " << p2.get_Element() << ". no element determined" << std::endl;
         }
+
+
 
 
 

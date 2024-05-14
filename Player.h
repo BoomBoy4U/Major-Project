@@ -11,7 +11,7 @@
 class Player : public Entity {
 protected:
 	int playerActionOption = 0;    	//player option to choose to act
-	bool dodge;
+	bool dodge = true;
 
 public: 
 int get_playerOption(); 	//return player option
