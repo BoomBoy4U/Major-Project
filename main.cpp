@@ -5,7 +5,7 @@
 #include"Entity.h"
 #include "Enemy.h"
 #include "Boss.h"
-#include "vector"
+#include <vector>
 
 
 int main() {
@@ -15,12 +15,76 @@ int main() {
     std::cin >> name;
     std::cout << std::endl;
 
-    Player* player = new Player(name, "elementalless", 0, 120, 100, 10);
+    Player* player = new Player(name, "elementalless", 0, 12000, 100, 10);
 
     int stage;
     std::cout << "Choose the stage: ";
     std::cin >> stage;
     std::cout << std::endl;
+
+
+    //just for fun (random generated stage)
+    if (stage == 999) {
+        std::vector<Entity*> Enemies;
+        srand(time(NULL));
+
+            std::string name;
+            int bossOrEnemy = 0;
+            int element = 0;
+            std::string elementType;
+
+        for (int i = 0; i < rand() % 20 + 1; i++) {
+
+
+
+            int type = rand() % 3 + 1;
+
+            switch (type) {
+            case 1:
+                name = "zodiak";
+                bossOrEnemy = 1;
+                elementType = "FIRE";
+                element = 1;
+                break;
+
+            case 2:
+                name = "Sage";
+                bossOrEnemy = 2;
+                elementType = "WATER";
+                element = 1;
+                break;
+
+            case 3:
+                name = "Golem";
+                bossOrEnemy = 1;
+                elementType = "EARTH";
+                element = 1;
+                break;
+
+            default:
+                break;
+            }
+            
+            if (bossOrEnemy == 1) {
+                int health = rand() % 300 + 100;
+                int attack = rand() % 50 + 10;
+                Enemies.push_back(new Enemy(name, elementType, element, health, attack));
+            }
+            else if (bossOrEnemy == 2) {
+                int health = rand() % 1000 + 500;
+                int attack = rand() % 50 + 10;
+                Enemies.push_back(new Boss(name, elementType, element, health, attack));
+            }
+        }
+
+
+        Gameplay stage1(Enemies, player);
+        stage1.play(Enemies, player);
+    }
+
+        
+
+
 
     if (stage == 1) {
         std::vector<Entity*> Enemies;
@@ -49,46 +113,6 @@ int main() {
         stage1.play(Enemies, player);
         //std::cout << "Congratulation you pass stage 3. " << std::endl;
     }
-
-
-    
-
-
-
-
-    
-    
-
-
-
-
-
-
- //   Player Sophana("Sophana", "Wizard", 150, 240, 20, 10);
- //   //Entity** enemies = new Entity*[3];
- //   //Enemy* Zodiak2 = new Enemy ("zodiak", "fire", 1, 100, 10);
- //   //Enemy* Golem = new Enemy ("Golem", "earth", 3, 120, 15);
- //   //Boss* Sage = new Boss ("Sage", "water", 2, 240, 20);
-
- //   //Entity* enemies = new Entity[3];
- //   //Enemy Zodiak2("zodiak", "fire", 1, 100, 10);
- //   //Enemy Golem("Golem", "earth", 3, 120, 15);
- //   //Enemy Sage("Sage", "water", 2, 240, 20);
-
- ///*   enemies[0] = Zodiak2;
- //   enemies[1] = Golem;
- //   enemies[2] = Sage;*/
-
-
- //   std::vector <Entity*> enemies2;
-
-
-
- //   enemies2.push_back(new Enemy("zodiak", "fire", 1, 100, 10));
- //   enemies2.push_back(new Enemy("Golem", "earth", 3, 120, 15));
- //   enemies2.push_back(new Boss("Sage", "water", 2, 240, 20));
- //   GameStage testLevel3(1, &Sophana, enemies2);
- //   testLevel3.gameplay();
 
 
     return 0;
