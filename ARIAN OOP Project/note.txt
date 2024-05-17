@@ -1,6 +1,0 @@
-to do tonight stop SP from going minuse; and present the winner 
-
-redefining game stage menu!
-
-level 2: health point to be doubled , 200,  2 normal and 1 bose enemy, when player kills the first then goes to next enemy (skill point rest to the default)
-
