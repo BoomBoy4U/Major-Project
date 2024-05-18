@@ -10,74 +10,19 @@
 
 int main() {
 
+
+    //player initialise
     std::string name;
     std::cout << "Enter your name: ";
     std::cin >> name;
     std::cout << std::endl;
-
     Player* player = new Player(name, "elementalless", 0, 12000, 10, 10);
 
+    //player select stage
     int stage;
     std::cout << "Choose the stage: ";
     std::cin >> stage;
     std::cout << std::endl;
-
-    //just for fun (random generated stage)
-    if (stage == 999) {
-        std::vector<Entity*> Enemies;
-        srand(time(NULL));
-
-            std::string name;
-            int bossOrEnemy = 0;
-            int element = 0;
-            std::string elementType;
-
-        for (int i = 0; i < rand() % 20 + 1; i++) {
-            int type = rand() % 3 + 1;
-
-            switch (type) {
-            case 1:
-                name = "zodiak";
-                bossOrEnemy = 1;
-                elementType = "FIRE";
-                element = 1;
-                break;
-
-            case 2:
-                name = "Sage";
-                bossOrEnemy = 2;
-                elementType = "WATER";
-                element = 1;
-                break;
-
-            case 3:
-                name = "Golem";
-                bossOrEnemy = 1;
-                elementType = "EARTH";
-                element = 1;
-                break;
-
-            default:
-                break;
-            }
-            
-            if (bossOrEnemy == 1) {
-                int health = rand() % 300 + 100;
-                int attack = rand() % 50 + 10;
-                Enemies.push_back(new Enemy(name, elementType, element, health, attack));
-            }
-            else if (bossOrEnemy == 2) {
-                int health = rand() % 1000 + 500;
-                int attack = rand() % 50 + 10;
-                Enemies.push_back(new Boss(name, elementType, element, health, attack));
-            }
-        }
-
-
-        Gameplay stage999(Enemies, player);
-        stage999.play(Enemies, player);
-    }
-
 
     //define the enemy type
     Enemy* zodiak = new Enemy("zodiak", "fire", 1, 80, 10);
@@ -115,7 +60,8 @@ int main() {
     Enemies3.push_back(golem);
     Enemies3.push_back(dragon);
 
-        
+    
+    //play the game
     if (stage == 1) {
         stage1.play(Enemies1, player);
         std::cout <<"Congratulation you pass stage 1. " << std::endl;
