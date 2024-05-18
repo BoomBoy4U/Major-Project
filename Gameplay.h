@@ -14,15 +14,21 @@ class Gameplay {
 private:
 	Player* player;
 	std::vector <Entity*>& enemies;
+	int stage =0;
 
 
 public:
 
 	Gameplay(std::vector<Entity*>& _enemies, Player* _player);
-	void addPlayer(Player* player);
-	void addenemy(Enemy* enemy);
-	void addBoss(Boss* boss);
-	void play(std::vector<Entity*>& enemies, Player* player);
+	//void addPlayer(Player* player);
+	//void addenemy(Enemy* enemy);
+	//void addBoss(Boss* boss);
+	int play(std::vector<Entity*>& enemies, Player* player);
+
+
+
+	int get_stage();
+	void set_stage(int _stage);
 
 
 

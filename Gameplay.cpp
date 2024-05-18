@@ -3,19 +3,31 @@ Gameplay::Gameplay(std::vector<Entity*>& _enemies, Player* player) :enemies(_ene
     player = new Player[1];
     player = player;
 }
+//
+//void Gameplay::addPlayer(Player* player) {
+//	this->player = player;
+//}
+//void Gameplay::addenemy(Enemy* enemy) {
+//	enemies.push_back(enemy);
+//}
+//
+//void Gameplay::addBoss(Boss* boss) {
+//	enemies.push_back(boss);
+//}
 
-void Gameplay::addPlayer(Player* player) {
-	this->player = player;
-}
-void Gameplay::addenemy(Enemy* enemy) {
-	enemies.push_back(enemy);
+int Gameplay::get_stage() {
+    return stage;
 }
 
-void Gameplay::addBoss(Boss* boss) {
-	enemies.push_back(boss);
+void Gameplay::set_stage(int _stage) {
+    stage = _stage;
 }
 
-void Gameplay::play(std::vector<Entity*>& enemies, Player* player) {
+int Gameplay::play(std::vector<Entity*>& enemies, Player* player) {
+   
+    // count enemy
+    int count = std::distance(enemies.begin(), enemies.end());
+    std::cout << "Enemies count: " << count << std::endl;
 
     while (!enemies.empty() && player->get_Health() > 0) {
         if (!enemies.empty()) {
@@ -29,6 +41,7 @@ void Gameplay::play(std::vector<Entity*>& enemies, Player* player) {
             std::cout << currentEnemy->get_name() << ":" << std::endl;
             std::cout << currentEnemy->get_Health() << " || " << currentEnemy->get_SkillPoint() << std::endl;
             std::cout << std::endl;
+
             // Player actions
 
             int choice;
@@ -37,19 +50,23 @@ void Gameplay::play(std::vector<Entity*>& enemies, Player* player) {
             std::cin >> choice;
             std::cout << std::endl;
 
-            while (choice < 1 || choice > 3) {
-                std::cout << "invalid Option! Choose your action again:" << std::endl;
-                std::cout << "1. dodge\n2. Use Skill\n3. utimate\n" << std::endl;
-                std::cin >> choice;
-
-            }
-
             while (player->get_SkillPoint() <= 0 && choice == 2) {
                 std::cout << "No SP! Choose your action again either 1 or 3:" << std::endl;
                 std::cout << "1. dodge\n2. Use Skill\n3. utimate\n" << std::endl;
                 std::cin >> choice;
             }
 
+            while (choice < 1 || choice > 3) {
+                std::cout << "invalid Option! Choose your action again:" << std::endl;
+                std::cout << "1. dodge\n2. Use Skill\n3. utimate\n" << std::endl;
+                std::cin >> choice;
+
+                while (player->get_SkillPoint() <= 0 && choice == 2) {
+                    std::cout << "No SP! Choose your action again either 1 or 3:" << std::endl;
+                    std::cout << "1. dodge\n2. Use Skill\n3. utimate\n" << std::endl;
+                    std::cin >> choice;
+                }
+            }
 
 
             
@@ -119,10 +136,12 @@ void Gameplay::play(std::vector<Entity*>& enemies, Player* player) {
 
     if (player->get_Health() <= 0) {
         std::cout << "Game Over! You have been defeated." << std::endl;
+        return stage = 0;
     }
 
     if (player->get_Health() >= 0 && enemies.empty()) {
         std::cout << "Congratulations! You have pass the stage and defeated all enemies including the boss." << std::endl;
+        return stage = 1;
     }
     
 
