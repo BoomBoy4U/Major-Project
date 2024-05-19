@@ -1,46 +1,34 @@
-# Compiler
+# Define the compiler
 CXX = g++
 
-# Compiler flags
+# Define the compiler flags
 CXXFLAGS = -std=c++11 -Wall
 
-# Target executable
-TARGET = game
+# Define the source files
+SRC = main.cpp Player.cpp Enemy.cpp Boss.cpp Gameplay.cpp Entity.cpp GameMenu.cpp
 
-# Source files
-SRCS = main.cpp \
-       Gameplay.cpp \
-       Player.cpp \
-       Entity.cpp \
-       Enemy.cpp \
-       Boss.cpp \
-       GameMenu.cpp
+# Define the header files
+HEADERS = Player.h Enemy.h Boss.h Gameplay.h Entity.h GameMenu.h
 
-# Object files
-OBJS = $(SRCS:.cpp=.o)
+# Define the output executable
+OUTPUT = game
 
-# Header files
-HEADERS = Gameplay.h \
-          Player.h \
-          Entity.h \
-          Enemy.h \
-          Boss.h \
-          GameMenu.h
+# Define the object files
+OBJ = $(SRC:.cpp=.o)
 
-# Default rule
-all: $(TARGET)
+# Default target
+all: $(OUTPUT)
 
-# Rule to link the target executable
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+# Link the object files to create the executable
+$(OUTPUT): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
-# Rule to compile source files into object files
+# Compile each source file into an object file
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Clean rule to remove object files and the executable
+# Clean up the build files
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJ) $(OUTPUT)
 
-# Phony targets
 .PHONY: all clean
